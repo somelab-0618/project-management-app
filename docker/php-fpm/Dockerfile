@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   default-mysql-client \
   python3 \
   unzip \
+  vim \
   && docker-php-ext-install \
   pdo_mysql \
   sockets \
@@ -13,9 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY --from=node:16.15 /usr/local/bin /usr/local/bin
 COPY --from=node:16.15 /usr/local/lib /usr/local/lib
 
-WORKDIR /var/www/html
+WORKDIR /var/www/api/
