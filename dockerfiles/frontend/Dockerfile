@@ -1,6 +1,0 @@
-FROM node:16-alpine
-
-ENV NODE_VERSION 16.15.0
-WORKDIR /frontend
-EXPOSE 3000
-ENV CI=true
